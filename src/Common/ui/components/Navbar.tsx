@@ -1,3 +1,4 @@
+import type { KeyboardEvent } from "react";
 import { observer } from "mobx-react-lite";
 import { NavLink, useNavigate } from "react-router-dom";
 
@@ -14,6 +15,18 @@ function Navbar() {
     });
   };
 
+  const handleSearchFocus = () => {
+    navigate("/search");
+  };
+
+  const handleSearchKeyDown = (
+    event: KeyboardEvent<HTMLInputElement>
+  ) => {
+    if (event.key === "Enter") {
+      navigate("/search");
+    }
+  };
+
   return (
     <nav>
       <div>
@@ -22,55 +35,66 @@ function Navbar() {
 
       <div>
         <NavLink
-  to="/"
-  className={({ isActive }) =>
-    isActive ? "active-link" : ""
-  }
->
-  Home
-</NavLink>
+          to="/"
+          className={({ isActive }) =>
+            isActive ? "active-link" : ""
+          }
+        >
+          Home
+        </NavLink>
 
         <NavLink
-  to="/watchlist"
-  className={({ isActive }) =>
-    isActive ? "active-link" : ""
-  }
->
-  Watchlist
-</NavLink>
+          to="/search"
+          className={({ isActive }) =>
+            isActive ? "active-link" : ""
+          }
+        >
+          Search
+        </NavLink>
 
         <NavLink
-  to="/collections"
-  className={({ isActive }) =>
-    isActive ? "active-link" : ""
-  }
->
-  Collections
-</NavLink>
+          to="/watchlist"
+          className={({ isActive }) =>
+            isActive ? "active-link" : ""
+          }
+        >
+          Watchlist
+        </NavLink>
 
         <NavLink
-  to="/tracker"
-  className={({ isActive }) =>
-    isActive ? "active-link" : ""
-  }
->
-  Tracker
-</NavLink>
+          to="/collections"
+          className={({ isActive }) =>
+            isActive ? "active-link" : ""
+          }
+        >
+          Collections
+        </NavLink>
 
         <NavLink
-  to="/settings"
-  className={({ isActive }) =>
-    isActive ? "active-link" : ""
-  }
->
-  Settings
-</NavLink>
+          to="/tracker"
+          className={({ isActive }) =>
+            isActive ? "active-link" : ""
+          }
+        >
+          Tracker
+        </NavLink>
+
+        <NavLink
+          to="/settings"
+          className={({ isActive }) =>
+            isActive ? "active-link" : ""
+          }
+        >
+          Settings
+        </NavLink>
       </div>
 
       <div>
         <input
           type="text"
           placeholder="Search..."
+          onFocus={handleSearchFocus}
+          onKeyDown={handleSearchKeyDown}
         />
 
         <button type="button">

@@ -41,6 +41,17 @@ function AppRouter() {
         />
 
         <Route
+          path="/search"
+          element={
+            <ProtectedRoute>
+              <AppShell>
+                <SearchPage />
+              </AppShell>
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
           path="/movie/:id"
           element={
             <ProtectedRoute>
@@ -60,29 +71,12 @@ function AppRouter() {
               </AppShell>
             </ProtectedRoute>
           }
-        />
-
-        <Route
-          path="/tv/:id/season/:seasonNumber"
-          element={
-            <ProtectedRoute>
-              <AppShell>
-                <SeasonDetailPage />
-              </AppShell>
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/search"
-          element={
-            <ProtectedRoute>
-              <AppShell>
-                <SearchPage />
-              </AppShell>
-            </ProtectedRoute>
-          }
-        />
+        >
+          <Route
+            path="season/:seasonNumber"
+            element={<SeasonDetailPage />}
+          />
+        </Route>
 
         <Route
           path="/watchlist"
