@@ -1,0 +1,13 @@
+{
+    "title": "खोज",
+    "placeholder": "फिल्में, टीवी शो, लोग खोजें...",
+    "recentSearches": "हाल की खोजें",
+    "clear": "साफ़ करें",
+    "noResults": "कोई परिणाम नहीं मिला।",
+    "searching": "खोज रहे हैं...",
+    "result_one": "{{count}} परिणाम",
+    "result_other": "{{count}} परिणाम",
+    "movies": "फिल्में",
+    "tvShows": "टीवी शो",
+    "people": "लोग"
+  }

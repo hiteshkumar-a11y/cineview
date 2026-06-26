@@ -1,20 +1,24 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { ThemeProvider } from "styled-components";
 
 import App from "./App.tsx";
 import { GlobalStyle } from "./Common/ui/styles/GlobalStyle";
-import { theme } from "./Common/ui/styles/theme";
+import ThemeProviderWrapper from "./Common/ui/components/ThemeProviderWrapper";
+
+import "./i18n";
+import { preferencesStore } from "./Preferences/data/stores/PreferencesStore";
 
 import "./index.css";
+
+preferencesStore.init();
 
 createRoot(
   document.getElementById("root")!
 ).render(
   <StrictMode>
-    <ThemeProvider theme={theme}>
+    <ThemeProviderWrapper>
       <GlobalStyle />
       <App />
-    </ThemeProvider>
+    </ThemeProviderWrapper>
   </StrictMode>
 );

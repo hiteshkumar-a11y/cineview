@@ -1,0 +1,15 @@
+{
+    "loading": "Loading...",
+    "notFoundTitle": "404 — TV Show Not Found",
+    "notFoundMessage": "The TV show you are looking for does not exist.",
+    "seasons": "Seasons",
+    "episodes": "episodes",
+    "addWatchlist": "Add to Watchlist",
+    "seasonNotFoundTitle": "404 — Season Not Found",
+    "seasonNotFoundMessage": "This season does not exist.",
+    "loadingSeason": "Loading season...",
+    "noEpisodes": "No episodes available.",
+    "noOverview": "No overview available.",
+    "watched": "Watched",
+    "noDescription": "No description available."
+  }

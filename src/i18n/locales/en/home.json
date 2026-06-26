@@ -1,0 +1,16 @@
+{
+    "trendingNow": "Trending Now",
+    "watchTrailer": "Watch Trailer",
+    "moreInfo": "More Info",
+    "browseByGenre": "Browse by Genre",
+    "all": "All",
+    "trending": "Trending",
+    "popular": "Popular",
+    "topRated": "Top Rated",
+    "upcoming": "Upcoming",
+    "noMovies": "No movies found.",
+    "addWatchlist": "Add Watchlist",
+    "inWatchlist": "In Watchlist",
+    "noTrailer": "No trailer available for this movie.",
+    "trailerFailed": "Failed to load trailer."
+  }

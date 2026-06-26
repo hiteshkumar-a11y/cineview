@@ -2,13 +2,17 @@ import { useEffect, useState } from "react";
 import type { KeyboardEvent } from "react";
 import styled from "styled-components";
 import { observer } from "mobx-react-lite";
+import { useTranslation } from "react-i18next";
 import {
   NavLink,
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
 
+
 import { authStore } from "../../../Authentication/data/stores/AuthStore";
+import { preferencesStore } from "../../../Preferences/data/stores/PreferencesStore";
+
 
 const Nav = styled.nav`
   position: sticky;
@@ -125,6 +129,7 @@ const LogoutButton = styled.button`
 function Navbar() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const { t } = useTranslation("common");
 
   const urlQuery = searchParams.get("q") ?? "";
   const [navQuery, setNavQuery] = useState(urlQuery);
@@ -168,30 +173,30 @@ function Navbar() {
       <Brand>CineView</Brand>
 
       <NavLinks>
-        <StyledNavLink to="/" end>
-          Home
-        </StyledNavLink>
+      <StyledNavLink to="/" end>
+    {t("home")}
+  </StyledNavLink>
         <StyledNavLink to="/search">
-          Search
+        {t("search")}
         </StyledNavLink>
         <StyledNavLink to="/watchlist">
-          Watchlist
+        {t("watchlist")}
         </StyledNavLink>
         <StyledNavLink to="/collections">
-          Collections
+        {t("collections")}
         </StyledNavLink>
         <StyledNavLink to="/tracker">
-          Tracker
+        {t("tracker")}
         </StyledNavLink>
         <StyledNavLink to="/settings">
-          Settings
+        {t("settings")}
         </StyledNavLink>
       </NavLinks>
 
       <RightSection>
         <SearchInput
           type="text"
-          placeholder="Search movies, shows..."
+          placeholder={t("searchPlaceholder")}
           value={navQuery}
           onChange={(event) =>
             setNavQuery(event.target.value)
@@ -199,7 +204,16 @@ function Navbar() {
           onKeyDown={handleSearchKeyDown}
         />
 
-        <IconButton type="button">EN</IconButton>
+<IconButton
+  type="button"
+  onClick={() =>
+    preferencesStore.setLanguage(
+      preferencesStore.language === "en" ? "hi" : "en"
+    )
+  }
+>
+  {preferencesStore.language.toUpperCase()}
+</IconButton>
 
         <Avatar title={authStore.currentUser ?? "User"}>
           {userInitial}
@@ -209,7 +223,7 @@ function Navbar() {
           type="button"
           onClick={handleLogout}
         >
-          Logout
+        {t("logout")}
         </LogoutButton>
       </RightSection>
     </Nav>

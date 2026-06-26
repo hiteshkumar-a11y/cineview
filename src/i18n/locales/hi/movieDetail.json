@@ -1,0 +1,15 @@
+{
+    "loading": "लोड हो रहा है...",
+    "notFoundTitle": "४०४ — फिल्म नहीं मिली",
+    "notFoundMessage": "आप जिस फिल्म की तलाश कर रहे हैं वह मौजूद नहीं है।",
+    "release": "रिलीज़",
+    "runtime": "अवधि",
+    "runtimeMinutes": "{{count}} मिनट",
+    "genres": "शैलियाँ",
+    "watchTrailer": "ट्रेलर देखें",
+    "addWatchlist": "वॉचलिस्ट में जोड़ें",
+    "cast": "कलाकार",
+    "noCast": "कलाकार की जानकारी उपलब्ध नहीं है।",
+    "similarMovies": "मिलती-जुलती फिल्में",
+    "recommendedMovies": "अनुशंसित फिल्में"
+  }

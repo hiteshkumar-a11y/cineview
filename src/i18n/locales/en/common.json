@@ -1,0 +1,14 @@
+{
+    "appName": "CineView",
+    "home": "Home",
+    "search": "Search",
+    "watchlist": "Watchlist",
+    "collections": "Collections",
+    "tracker": "Tracker",
+    "settings": "Settings",
+    "logout": "Logout",
+    "loading": "Loading...",
+    "error": "Something went wrong.",
+    "searchPlaceholder": "Search movies, shows...",
+    "notFound": "Not Found"
+  }

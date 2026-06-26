@@ -1,0 +1,13 @@
+{
+    "title": "Search",
+    "placeholder": "Search movies, TV shows, people...",
+    "recentSearches": "Recent Searches",
+    "clear": "Clear",
+    "noResults": "No results found.",
+    "searching": "Searching...",
+    "result_one": "{{count}} result",
+    "result_other": "{{count}} results",
+    "movies": "Movies",
+    "tvShows": "TV Shows",
+    "people": "People"
+  }

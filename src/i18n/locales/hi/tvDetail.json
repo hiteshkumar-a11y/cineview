@@ -1,0 +1,15 @@
+{
+    "loading": "लोड हो रहा है...",
+    "notFoundTitle": "४०४ — टीवी शो नहीं मिला",
+    "notFoundMessage": "आप जिस टीवी शो की तलाश कर रहे हैं वह मौजूद नहीं है।",
+    "seasons": "सीज़न",
+    "episodes": "एपिसोड",
+    "addWatchlist": "वॉचलिस्ट में जोड़ें",
+    "seasonNotFoundTitle": "४०४ — सीज़न नहीं मिला",
+    "seasonNotFoundMessage": "यह सीज़न मौजूद नहीं है।",
+    "loadingSeason": "सीज़न लोड हो रहा है...",
+    "noEpisodes": "कोई एपिसोड उपलब्ध नहीं है।",
+    "noOverview": "कोई विवरण उपलब्ध नहीं है।",
+    "watched": "देखा गया",
+    "noDescription": "कोई विवरण उपलब्ध नहीं है।"
+  }

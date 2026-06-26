@@ -5,6 +5,9 @@ import CastCarousel from "../components/CastCarousel";
 import ContentRow from "../components/ContentRow";
 import TrailerModal from "../components/TrailerModal";
 import { useMovieDetail } from "../hooks/useMovieDetail";
+import { formatDate } from "../../../Common/utils/formatDate";
+import { useTranslation } from "react-i18next";
+const { t, i18n } = useTranslation("movieDetail");
 
 function MovieDetailPage() {
   const { id } = useParams();
@@ -108,9 +111,9 @@ function MovieDetailPage() {
 
           <p>⭐ {movie.vote_average.toFixed(1)}</p>
 
-          {movie.release_date && (
-            <p>Release: {movie.release_date}</p>
-          )}
+          <p>
+  {t("release")}: {formatDate(movie.release_date, i18n.language)}
+</p>
 
           {movie.runtime && (
             <p>Runtime: {movie.runtime} min</p>

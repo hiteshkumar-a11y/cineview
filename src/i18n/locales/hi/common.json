@@ -1,0 +1,14 @@
+{
+    "appName": "सिनेव्यू",
+    "home": "होम",
+    "search": "खोज",
+    "watchlist": "वॉचलिस्ट",
+    "collections": "संग्रह",
+    "tracker": "ट्रैकर",
+    "settings": "सेटिंग्स",
+    "logout": "लॉग आउट",
+    "loading": "लोड हो रहा है...",
+    "searchPlaceholder": "फिल्में, शो खोजें...",
+    "error": "कुछ गलत हो गया।",
+    "notFound": "नहीं मिला"
+  }

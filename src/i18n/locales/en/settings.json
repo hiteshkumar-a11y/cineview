@@ -1,0 +1,9 @@
+{
+    "title": "Settings",
+    "language": "Language",
+    "region": "Region",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "logout": "Logout"
+  }

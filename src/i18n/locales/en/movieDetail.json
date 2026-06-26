@@ -1,0 +1,15 @@
+{
+    "loading": "Loading...",
+    "notFoundTitle": "404 — Movie Not Found",
+    "notFoundMessage": "The movie you are looking for does not exist.",
+    "release": "Release",
+    "runtime": "Runtime",
+    "runtimeMinutes": "{{count}} min",
+    "genres": "Genres",
+    "watchTrailer": "Watch Trailer",
+    "addWatchlist": "Add to Watchlist",
+    "cast": "Cast",
+    "noCast": "No cast information available.",
+    "similarMovies": "Similar Movies",
+    "recommendedMovies": "Recommended Movies"
+  }
