@@ -87,7 +87,7 @@ function HomePage() {
   }
 
   return (
-    <main style={{ padding: "24px" }}>
+    <>
       {heroMovie && (
         <HeroBanner
           movie={heroMovie}
@@ -141,7 +141,7 @@ function HomePage() {
           onClose={() => setTrailerKey(null)}
         />
       )}
-    </main>
+    </>
   );
 }
 

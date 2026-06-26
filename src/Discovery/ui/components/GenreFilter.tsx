@@ -6,6 +6,18 @@ interface GenreFilterProps {
   onSelect: (genreId: number | null) => void;
 }
 
+function getChipStyle(isActive: boolean) {
+  return {
+    padding: "8px 16px",
+    borderRadius: "20px",
+    border: "1px solid #2a2a36",
+    cursor: "pointer",
+    background: isActive ? "#e50914" : "#1f1f28",
+    color: "#ffffff",
+    fontWeight: isActive ? 600 : 400,
+  } as const;
+}
+
 function GenreFilter({
   genres,
   activeGenreId,
@@ -17,32 +29,26 @@ function GenreFilter({
         marginBottom: "30px",
       }}
     >
-      <h2>Browse by Genre</h2>
+      <h2
+        style={{
+          color: "#ffffff",
+          marginBottom: "15px",
+        }}
+      >
+        Browse by Genre
+      </h2>
 
       <div
         style={{
           display: "flex",
           flexWrap: "wrap",
           gap: "10px",
-          marginTop: "15px",
         }}
       >
         <button
+          type="button"
           onClick={() => onSelect(null)}
-          style={{
-            padding: "8px 16px",
-            borderRadius: "20px",
-            border: "1px solid #ccc",
-            cursor: "pointer",
-            background:
-              activeGenreId === null
-                ? "#2563eb"
-                : "#ffffff",
-            color:
-              activeGenreId === null
-                ? "#ffffff"
-                : "#000000",
-          }}
+          style={getChipStyle(activeGenreId === null)}
         >
           All
         </button>
@@ -50,21 +56,11 @@ function GenreFilter({
         {genres.map((genre) => (
           <button
             key={genre.id}
+            type="button"
             onClick={() => onSelect(genre.id)}
-            style={{
-              padding: "8px 16px",
-              borderRadius: "20px",
-              border: "1px solid #ccc",
-              cursor: "pointer",
-              background:
-                activeGenreId === genre.id
-                  ? "#2563eb"
-                  : "#ffffff",
-              color:
-                activeGenreId === genre.id
-                  ? "#ffffff"
-                  : "#000000",
-            }}
+            style={getChipStyle(
+              activeGenreId === genre.id
+            )}
           >
             {genre.name}
           </button>
