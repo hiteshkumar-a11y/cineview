@@ -17,6 +17,9 @@ import hiMovieDetail from "./locales/hi/movieDetail.json";
 import hiTvDetail from "./locales/hi/tvDetail.json";
 import hiSettings from "./locales/hi/settings.json";
 
+import enWatchlist from "./locales/en/watchlist.json";
+import hiWatchlist from "./locales/hi/watchlist.json";
+
 void i18n.use(initReactI18next).init({
   resources: {
     en: {
@@ -27,6 +30,7 @@ void i18n.use(initReactI18next).init({
       movieDetail: enMovieDetail,
       tvDetail: enTvDetail,
       settings: enSettings,
+      watchlist: enWatchlist,
     },
     hi: {
       common: hiCommon,
@@ -36,6 +40,7 @@ void i18n.use(initReactI18next).init({
       movieDetail: hiMovieDetail,
       tvDetail: hiTvDetail,
       settings: hiSettings,
+      watchlist: hiWatchlist,
     },
   },
   lng: "en",

@@ -1,0 +1,16 @@
+{
+    "title": "Watchlist",
+    "all": "All",
+    "wantToWatch": "Want to Watch",
+    "watching": "Watching",
+    "completed": "Completed",
+    "sortDateAdded": "Date Added",
+    "sortTitle": "Title",
+    "sortRating": "Rating",
+    "emptyTitle": "Your watchlist is empty",
+    "emptyMessage": "Browse movies and add them to get started.",
+    "remove": "Remove",
+    "hasNote": "Has note",
+    "noteLabel": "नोट",
+"notePlaceholder": "व्यक्तिगत नोट जोड़ें (वैकल्पिक)..."
+  }

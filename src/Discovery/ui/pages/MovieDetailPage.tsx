@@ -7,11 +7,15 @@ import TrailerModal from "../components/TrailerModal";
 import { useMovieDetail } from "../hooks/useMovieDetail";
 import { formatDate } from "../../../Common/utils/formatDate";
 import { useTranslation } from "react-i18next";
-const { t, i18n } = useTranslation("movieDetail");
+import { watchlistStore } from "../../../Watchlist/data/stores/WatchlistStore";
+import { observer } from "mobx-react-lite";
 
 function MovieDetailPage() {
+  const { t, i18n } = useTranslation("movieDetail");
   const { id } = useParams();
   const movieId = Number(id);
+  
+
 
   const {
     movie,
@@ -58,6 +62,8 @@ function MovieDetailPage() {
       </p>
     );
   }
+
+  const inWatchlist = watchlistStore.isInWatchlist(movie.id, "movie");
 
   const backdropUrl = movie.backdrop_path
     ? `${imageBaseUrl}${movie.backdrop_path}`
@@ -111,10 +117,11 @@ function MovieDetailPage() {
 
           <p>⭐ {movie.vote_average.toFixed(1)}</p>
 
-          <p>
-  {t("release")}: {formatDate(movie.release_date, i18n.language)}
-</p>
-
+          {movie.release_date && (
+  <p>
+    {t("release")}: {formatDate(movie.release_date, i18n.language)}
+  </p>
+)}
           {movie.runtime && (
             <p>Runtime: {movie.runtime} min</p>
           )}
@@ -151,14 +158,26 @@ function MovieDetailPage() {
               ▶ Watch Trailer
             </button>
 
-            <button
+            {/* <button
               type="button"
               onClick={() =>
                 console.log("Watchlist placeholder")
               }
             >
               + Add to Watchlist
-            </button>
+            </button> */}
+
+<button onClick={() =>
+  watchlistStore.toggle({
+    mediaId: movie.id,
+    mediaType: "movie",
+    title: movie.title,
+    posterPath: movie.poster_path ?? null,
+    rating: movie.vote_average,
+  })
+}>
+  {inWatchlist ? t("inWatchlist") : t("addWatchlist")}
+</button>
           </div>
         </div>
       </section>
@@ -189,4 +208,4 @@ function MovieDetailPage() {
   );
 }
 
-export default MovieDetailPage;
+export default observer(MovieDetailPage);

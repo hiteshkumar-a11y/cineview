@@ -9,8 +9,12 @@ import "./i18n";
 import { preferencesStore } from "./Preferences/data/stores/PreferencesStore";
 
 import "./index.css";
+import { watchlistStore } from "./Watchlist/data/stores/WatchlistStore";
 
 preferencesStore.init();
+
+watchlistStore.init(); 
+
 
 createRoot(
   document.getElementById("root")!

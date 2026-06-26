@@ -1,11 +1,14 @@
 import { Link, Outlet, useParams } from "react-router-dom";
 
 import { useTvShowDetail } from "../hooks/useTvShowDetail";
+import { watchlistStore } from "../../../Watchlist/data/stores/WatchlistStore";
+import { observer } from "mobx-react-lite";
+import { useTranslation } from "react-i18next";
 
 function TvShowDetailPage() {
   const { id } = useParams();
   const tvId = Number(id);
-
+  const { t } = useTranslation("tvDetail");
   const { show, loading, notFound, error } =
     useTvShowDetail(tvId);
 
@@ -40,6 +43,8 @@ function TvShowDetailPage() {
       </p>
     );
   }
+
+  const inWatchlist = watchlistStore.isInWatchlist(show.id, "tv");
 
   const posterUrl = show.poster_path
     ? `${imageBaseUrl}${show.poster_path}`
@@ -84,7 +89,7 @@ function TvShowDetailPage() {
             {show.overview}
           </p>
 
-          <button
+          {/* <button
             type="button"
             onClick={() =>
               console.log("Watchlist placeholder")
@@ -92,7 +97,19 @@ function TvShowDetailPage() {
             style={{ marginTop: "20px" }}
           >
             + Add to Watchlist
-          </button>
+          </button> */} 
+
+          <button onClick={() =>
+  watchlistStore.toggle({
+    mediaId: show.id,
+    mediaType: "tv",
+    title: show.name,
+    posterPath: show.poster_path ?? null,
+    rating: show.vote_average,
+  })
+}>
+  {inWatchlist ? t("inWatchlist") : t("addWatchlist")}
+</button>
         </div>
       </section>
 
@@ -153,4 +170,4 @@ function TvShowDetailPage() {
   );
 }
 
-export default TvShowDetailPage;
+export default observer(TvShowDetailPage);

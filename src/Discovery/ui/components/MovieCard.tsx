@@ -86,19 +86,26 @@ function MovieCard({
         </p>
 
         <button
-          onClick={handleWatchlistClick}
-          style={{
-            width: "100%",
-            padding: "10px",
-            border: "none",
-            borderRadius: "6px",
-            cursor: "pointer",
-          }}
-        >
-          {isInWatchlist
-            ? "✓ In Watchlist"
-            : "+ Add Watchlist"}
-        </button>
+  type="button"
+  onClick={handleWatchlistClick}
+  style={{
+    width: "100%",
+    padding: "10px",
+    borderRadius: "6px",
+    cursor: "pointer",
+    fontWeight: 600,
+    fontSize: "14px",
+    transition: "background 0.2s ease, color 0.2s ease, border 0.2s ease",
+    // 👇 different look for each state
+    backgroundColor: isInWatchlist ? "#166534" : "#ffffff",
+    color: isInWatchlist ? "#ffffff" : "#111827",
+    border: isInWatchlist
+      ? "1px solid #22c55e"
+      : "1px solid transparent",
+  }}
+>
+  {isInWatchlist ? "✓ In Watchlist" : "+ Add Watchlist"}
+</button>
       </div>
     </div>
   );

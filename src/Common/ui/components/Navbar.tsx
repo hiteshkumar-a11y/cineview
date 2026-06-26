@@ -8,6 +8,8 @@ import {
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
+import { watchlistStore } from "../../../Watchlist/data/stores/WatchlistStore";
+
 
 
 import { authStore } from "../../../Authentication/data/stores/AuthStore";
@@ -126,6 +128,22 @@ const LogoutButton = styled.button`
   }
 `;
 
+const Badge = styled.span`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  margin-left: 6px;
+  padding: 0 6px;
+  border-radius: ${({ theme }) => theme.radius.pill};
+  background: ${({ theme }) => theme.colors.accent};
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+`;
+
 function Navbar() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -180,8 +198,11 @@ function Navbar() {
         {t("search")}
         </StyledNavLink>
         <StyledNavLink to="/watchlist">
-        {t("watchlist")}
-        </StyledNavLink>
+  {t("watchlist")}
+  {watchlistStore.totalCount > 0 && (
+    <Badge>{watchlistStore.totalCount}</Badge>
+  )}
+</StyledNavLink>
         <StyledNavLink to="/collections">
         {t("collections")}
         </StyledNavLink>

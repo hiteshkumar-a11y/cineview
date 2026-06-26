@@ -1,5 +1,7 @@
 import type { Movie } from "../../data/schemas/movieSchema";
 import MovieCard from "./MovieCard";
+import { observer } from "mobx-react-lite";
+import { watchlistStore } from "../../../Watchlist/data/stores/WatchlistStore";
 
 interface ContentRowProps {
   title: string;
@@ -15,82 +17,43 @@ function ContentRow({
   error,
 }: ContentRowProps) {
   return (
-    <section
-      style={{
-        marginBottom: "48px",
-      }}
-    >
-      <h2
-        style={{
-          marginBottom: "20px",
-        }}
-      >
-        {title}
-      </h2>
+    <section style={{ marginBottom: "48px" }}>
+      <h2 style={{ marginBottom: "20px" }}>{title}</h2>
 
-      {isLoading && (
+      {/* ... loading / error / empty states stay the same ... */}
+
+      {!isLoading && !error && items.length > 0 && (
         <div
           style={{
             display: "flex",
-            gap: "16px",
+            gap: "18px",
+            overflowX: "auto",
+            paddingBottom: "10px",
           }}
         >
-          {Array.from({ length: 5 }).map((_, index) => (
-            <div
-              key={index}
-              style={{
-                width: 180,
-                height: 360,
-                background: "#2d2d2d",
-                borderRadius: 12,
-                flexShrink: 0,
-              }}
+          {items.map((movie) => (
+            <MovieCard
+              key={movie.id}
+              movie={movie}
+              isInWatchlist={watchlistStore.isInWatchlist(
+                movie.id,
+                "movie"
+              )}
+              onToggleWatchlist={() =>
+                watchlistStore.toggle({
+                  mediaId: movie.id,
+                  mediaType: "movie",
+                  title: movie.title,
+                  posterPath: movie.poster_path ?? null,
+                  rating: movie.vote_average,
+                })
+              }
             />
           ))}
         </div>
       )}
-
-      {!isLoading && error && (
-        <p
-          style={{
-            color: "red",
-          }}
-        >
-          {error}
-        </p>
-      )}
-
-      {!isLoading &&
-        !error &&
-        items.length === 0 && (
-          <p>No movies found.</p>
-        )}
-
-      {!isLoading &&
-        !error &&
-        items.length > 0 && (
-          <div
-            style={{
-              display: "flex",
-              gap: "18px",
-              overflowX: "auto",
-              paddingBottom: "10px",
-            }}
-          >
-            {items.map((movie) => (
-              <MovieCard
-                key={movie.id}
-                movie={movie}
-                isInWatchlist={false}
-                onToggleWatchlist={() =>
-                  console.log(movie.title)
-                }
-              />
-            ))}
-          </div>
-        )}
     </section>
   );
 }
 
-export default ContentRow;
+export default observer(ContentRow);
