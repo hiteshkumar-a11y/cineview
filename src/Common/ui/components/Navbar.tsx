@@ -8,7 +8,7 @@ import {
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
-import { watchlistStore } from "../../../Watchlist/data/stores/WatchlistStore";
+import { collectionStore } from "../../../Collections/data/stores/CollectionStore";
 
 
 
@@ -199,8 +199,8 @@ function Navbar() {
         </StyledNavLink>
         <StyledNavLink to="/watchlist">
   {t("watchlist")}
-  {watchlistStore.totalCount > 0 && (
-    <Badge>{watchlistStore.totalCount}</Badge>
+  {collectionStore.totalCount > 0 && (
+    <Badge>{collectionStore.totalCount}</Badge>
   )}
 </StyledNavLink>
         <StyledNavLink to="/collections">

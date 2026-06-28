@@ -29,8 +29,13 @@ function RecentSearches({
           marginBottom: "12px",
         }}
       >
-        <h2 style={{ margin: 0 }}>Recent Searches</h2>
-        <button onClick={onClear}>Clear</button>
+        {/* <h2 style={{ margin: 0 }}>Recent Searches</h2>
+        <button onClick={onClear}>Clear</button> */}
+
+<h2 style={{ margin: 0, color: "#ffffff" }}>Recent Searches</h2>
+<button onClick={onClear} style={{ color: "#ffffff", background: "transparent", border: "1px solid #444", borderRadius: 8, padding: "6px 12px", cursor: "pointer" }}>
+  Clear
+</button>
       </div>
 
       <div
@@ -50,6 +55,7 @@ function RecentSearches({
               padding: "8px 14px",
               borderRadius: "20px",
               border: "1px solid #444",
+              background: "#1f1f1f",
             }}
           >
             <button
@@ -58,6 +64,7 @@ function RecentSearches({
                 border: "none",
                 background: "transparent",
                 cursor: "pointer",
+                color: "#ffffff",
               }}
             >
               {search}
@@ -69,6 +76,8 @@ function RecentSearches({
                 border: "none",
                 background: "transparent",
                 cursor: "pointer",
+                color: "#9ca3af", 
+
               }}
             >
               ✕

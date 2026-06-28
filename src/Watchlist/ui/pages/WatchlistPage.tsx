@@ -1,7 +1,9 @@
 import { observer } from "mobx-react-lite";
 import { useMemo, useState } from "react";
 
-import { watchlistStore } from "../../data/stores/WatchlistStore";
+// import { watchlistStore } from "../../data/stores/WatchlistStore";
+import { collectionStore } from "../../../Collections/data/stores/CollectionStore";
+
 import type {
   SortKey,
   WatchlistFilter,
@@ -18,7 +20,7 @@ function WatchlistPage() {
   const [sortKey, setSortKey] = useState<SortKey>("date_added");
 
   const filteredEntries = useMemo(() => {
-    let list = watchlistStore.entries;
+    let list = collectionStore.entries;
 
     if (activeFilter !== "all") {
       list = list.filter((entry) => entry.status === activeFilter);
@@ -33,7 +35,7 @@ function WatchlistPage() {
       }
       return b.snapshot.rating - a.snapshot.rating;
     });
-  }, [watchlistStore.entries, activeFilter, sortKey]);
+  }, [collectionStore.entries, activeFilter, sortKey]);
 
   return (
     <div style={{ padding: "24px" }}>
@@ -41,7 +43,7 @@ function WatchlistPage() {
 
       <WatchlistFilterTabs
         activeFilter={activeFilter}
-        counts={watchlistStore.countByStatus}
+        counts={collectionStore.countByStatus}
         onSelect={setActiveFilter}
       />
 
@@ -57,12 +59,12 @@ function WatchlistPage() {
           <WatchlistEntryCard
           key={entry.id}
           entry={entry}
-          onRemove={() => watchlistStore.remove(entry.id)}
+          onRemove={() => collectionStore.removeFromWatchlist(entry.id)}
           onStatusChange={(status) =>
-            watchlistStore.updateStatus(entry.id, status)
+            collectionStore.updateWatchlistStatus(entry.id, status)
           }
           onNoteChange={(note) =>
-            watchlistStore.updateNote(entry.id, note)
+            collectionStore.updateWatchlistNote(entry.id, note)
           }
         />
         ))

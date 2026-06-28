@@ -1,21 +1,20 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { observer } from "mobx-react-lite";
+import { useTranslation } from "react-i18next";
 
 import CastCarousel from "../components/CastCarousel";
 import ContentRow from "../components/ContentRow";
 import TrailerModal from "../components/TrailerModal";
 import { useMovieDetail } from "../hooks/useMovieDetail";
 import { formatDate } from "../../../Common/utils/formatDate";
-import { useTranslation } from "react-i18next";
-import { watchlistStore } from "../../../Watchlist/data/stores/WatchlistStore";
-import { observer } from "mobx-react-lite";
+import { collectionStore } from "../../../Collections/data/stores/CollectionStore";
+import AddToListPopover from "../../../Collections/ui/components/AddToListPopover";
 
 function MovieDetailPage() {
   const { t, i18n } = useTranslation("movieDetail");
   const { id } = useParams();
   const movieId = Number(id);
-  
-
 
   const {
     movie,
@@ -28,8 +27,8 @@ function MovieDetailPage() {
     error,
   } = useMovieDetail(movieId);
 
-  const [showTrailer, setShowTrailer] =
-    useState(false);
+  const [showTrailer, setShowTrailer] = useState(false);
+  const [showListPopover, setShowListPopover] = useState(false);
 
   const imageBaseUrl =
     import.meta.env.VITE_TMDB_IMAGE_BASE_URL;
@@ -42,28 +41,29 @@ function MovieDetailPage() {
     return (
       <div style={{ padding: "24px" }}>
         <h1>404 — Movie Not Found</h1>
-        <p>
-          The movie you are looking for does not
-          exist.
-        </p>
+        <p>The movie you are looking for does not exist.</p>
       </div>
     );
   }
 
   if (error || !movie) {
     return (
-      <p
-        style={{
-          padding: "24px",
-          color: "red",
-        }}
-      >
+      <p style={{ padding: "24px", color: "red" }}>
         {error ?? "Something went wrong."}
       </p>
     );
   }
 
-  const inWatchlist = watchlistStore.isInWatchlist(movie.id, "movie");
+  const inWatchlist = collectionStore.isInWatchlist(movie.id, "movie");
+  const watchlistEntry = collectionStore.getWatchlistEntry(movie.id, "movie");
+
+  const mediaSnapshot = {
+    mediaId: movie.id,
+    mediaType: "movie" as const,
+    title: movie.title,
+    posterPath: movie.poster_path ?? null,
+    rating: movie.vote_average,
+  };
 
   const backdropUrl = movie.backdrop_path
     ? `${imageBaseUrl}${movie.backdrop_path}`
@@ -86,10 +86,7 @@ function MovieDetailPage() {
         <img
           src={posterUrl}
           alt={movie.title}
-          style={{
-            width: "100%",
-            borderRadius: "12px",
-          }}
+          style={{ width: "100%", borderRadius: "12px" }}
         />
 
         <div>
@@ -110,21 +107,19 @@ function MovieDetailPage() {
           <h1>{movie.title}</h1>
 
           {movie.tagline && (
-            <p style={{ color: "#9ca3af" }}>
-              {movie.tagline}
-            </p>
+            <p style={{ color: "#9ca3af" }}>{movie.tagline}</p>
           )}
 
           <p>⭐ {movie.vote_average.toFixed(1)}</p>
 
           {movie.release_date && (
-  <p>
-    {t("release")}: {formatDate(movie.release_date, i18n.language)}
-  </p>
-)}
-          {movie.runtime && (
-            <p>Runtime: {movie.runtime} min</p>
+            <p>
+              {t("release")}:{" "}
+              {formatDate(movie.release_date, i18n.language)}
+            </p>
           )}
+
+          {movie.runtime && <p>Runtime: {movie.runtime} min</p>}
 
           {movie.genres && (
             <p>
@@ -135,12 +130,7 @@ function MovieDetailPage() {
             </p>
           )}
 
-          <p
-            style={{
-              lineHeight: 1.7,
-              marginTop: "16px",
-            }}
-          >
+          <p style={{ lineHeight: 1.7, marginTop: "16px" }}>
             {movie.overview}
           </p>
 
@@ -149,35 +139,41 @@ function MovieDetailPage() {
               display: "flex",
               gap: "12px",
               marginTop: "20px",
+              flexWrap: "wrap",
+              position: "relative",
             }}
           >
             <button
+              type="button"
               disabled={!trailerVideo}
               onClick={() => setShowTrailer(true)}
             >
               ▶ Watch Trailer
             </button>
 
-            {/* <button
+            <button
               type="button"
               onClick={() =>
-                console.log("Watchlist placeholder")
+                collectionStore.toggleWatchlist(mediaSnapshot)
               }
             >
-              + Add to Watchlist
-            </button> */}
+              {inWatchlist ? t("inWatchlist") : t("addWatchlist")}
+              {watchlistEntry?.note ? " 📝" : ""}
+            </button>
 
-<button onClick={() =>
-  watchlistStore.toggle({
-    mediaId: movie.id,
-    mediaType: "movie",
-    title: movie.title,
-    posterPath: movie.poster_path ?? null,
-    rating: movie.vote_average,
-  })
-}>
-  {inWatchlist ? t("inWatchlist") : t("addWatchlist")}
-</button>
+            <button
+              type="button"
+              onClick={() => setShowListPopover((prev) => !prev)}
+            >
+              + Add to List
+            </button>
+
+            {showListPopover && (
+              <AddToListPopover
+                snapshot={mediaSnapshot}
+                onClose={() => setShowListPopover(false)}
+              />
+            )}
           </div>
         </div>
       </section>

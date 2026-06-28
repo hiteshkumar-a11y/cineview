@@ -1,7 +1,8 @@
 import type { Movie } from "../../data/schemas/movieSchema";
 import MovieCard from "./MovieCard";
 import { observer } from "mobx-react-lite";
-import { watchlistStore } from "../../../Watchlist/data/stores/WatchlistStore";
+// import { watchlistStore } from "../../../Watchlist/data/stores/WatchlistStore";
+import { collectionStore } from "../../../Collections/data/stores/CollectionStore";
 
 interface ContentRowProps {
   title: string;
@@ -35,12 +36,12 @@ function ContentRow({
             <MovieCard
               key={movie.id}
               movie={movie}
-              isInWatchlist={watchlistStore.isInWatchlist(
+              isInWatchlist={collectionStore.isInWatchlist(
                 movie.id,
                 "movie"
-              )}
+              )}  
               onToggleWatchlist={() =>
-                watchlistStore.toggle({
+                collectionStore.toggleWatchlist({
                   mediaId: movie.id,
                   mediaType: "movie",
                   title: movie.title,

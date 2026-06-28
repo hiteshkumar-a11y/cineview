@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom";
+import { observer } from "mobx-react-lite";
 
 import { useSeasonDetail } from "../hooks/useSeasonDetail";
+import { collectionStore } from "../../../Collections/data/stores/CollectionStore";
 
 function SeasonDetailPage() {
   const { id, seasonNumber } = useParams();
@@ -34,11 +36,25 @@ function SeasonDetailPage() {
     );
   }
 
+  const progress = collectionStore.getSeasonProgress(
+    tvId,
+    seasonNum,
+    season.episodes.length
+  );
+
+  const episodeIds = season.episodes.map((ep) => ep.id);
+
+  function handleMarkAll() {
+    collectionStore.markAllSeason(tvId, seasonNum, episodeIds);
+  }
+
+  function handleUnmarkAll() {
+    collectionStore.unmarkAllSeason(tvId, seasonNum);
+  }
+
   return (
     <section>
-      <h2 style={{ marginBottom: "8px" }}>
-        {season.name}
-      </h2>
+      <h2 style={{ marginBottom: "8px" }}>{season.name}</h2>
 
       <p
         style={{
@@ -48,6 +64,45 @@ function SeasonDetailPage() {
       >
         {season.overview || "No overview available."}
       </p>
+
+      <div style={{ marginBottom: "24px" }}>
+        <p style={{ marginBottom: "8px", color: "#e5e7eb" }}>
+          Season progress: {progress.watched}/{progress.total}
+        </p>
+
+        <div
+          style={{
+            height: "8px",
+            background: "#374151",
+            borderRadius: "4px",
+            overflow: "hidden",
+            marginBottom: "12px",
+          }}
+        >
+          <div
+            style={{
+              height: "100%",
+              width: `${
+                progress.total
+                  ? (progress.watched / progress.total) * 100
+                  : 0
+              }%`,
+              background: "#22c55e",
+            }}
+          />
+        </div>
+
+        <button
+          type="button"
+          onClick={handleMarkAll}
+          style={{ marginRight: "8px" }}
+        >
+          Mark all
+        </button>
+        <button type="button" onClick={handleUnmarkAll}>
+          Unmark all
+        </button>
+      </div>
 
       {season.episodes.length === 0 ? (
         <p>No episodes available.</p>
@@ -98,8 +153,7 @@ function SeasonDetailPage() {
                   >
                     <div>
                       <h3 style={{ margin: "0 0 8px" }}>
-                        {episode.episode_number}.{" "}
-                        {episode.name}
+                        {episode.episode_number}. {episode.name}
                       </h3>
 
                       <p
@@ -108,8 +162,7 @@ function SeasonDetailPage() {
                           color: "#9ca3af",
                         }}
                       >
-                        ⭐{" "}
-                        {episode.vote_average.toFixed(1)}
+                        ⭐ {episode.vote_average.toFixed(1)}
                         {episode.runtime
                           ? ` · ${episode.runtime} min`
                           : ""}
@@ -122,13 +175,20 @@ function SeasonDetailPage() {
                         alignItems: "center",
                         gap: "8px",
                         whiteSpace: "nowrap",
+                        color: "#ffffff",
                       }}
                     >
                       <input
                         type="checkbox"
+                        checked={collectionStore.isEpisodeWatched(
+                          tvId,
+                          seasonNum,
+                          episode.id
+                        )}
                         onChange={() =>
-                          console.log(
-                            "Episode tracker placeholder",
+                          collectionStore.toggleEpisode(
+                            tvId,
+                            seasonNum,
                             episode.id
                           )
                         }
@@ -151,4 +211,4 @@ function SeasonDetailPage() {
   );
 }
 
-export default SeasonDetailPage;
+export default observer(SeasonDetailPage);

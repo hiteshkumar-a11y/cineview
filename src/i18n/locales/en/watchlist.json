@@ -12,5 +12,8 @@
     "remove": "Remove",
     "hasNote": "Has note",
     "noteLabel": "Note",
-"notePlaceholder": "Add a personal note (optional)..."
-  }
+"notePlaceholder": "Add a personal note (optional)...",
+"saveNote": "Save",
+"cancelNote": "Cancel",
+"clearNote": "Clear",
+"inWatchlist": "In Watchlist"  }

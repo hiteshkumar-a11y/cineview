@@ -12,5 +12,8 @@
     "remove": "Remove",
     "hasNote": "Has note",
     "noteLabel": "नोट",
-"notePlaceholder": "व्यक्तिगत नोट जोड़ें (वैकल्पिक)..."
+"notePlaceholder": "व्यक्तिगत नोट जोड़ें (वैकल्पिक)...",
+"saveNote": "सहेजें",
+"cancelNote": "रद्द करें",
+"clearNote": "हटाएं"
   }

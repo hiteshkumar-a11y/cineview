@@ -10,7 +10,9 @@ import SearchPage from "../../Discovery/ui/pages/SearchPage";
 
 import WatchlistPage from "../../Watchlist/ui/pages/WatchlistPage";
 
-import CollectionsPage from "../../Collections/ui/pages/CollectionsPage";
+import MyListsPage from "../../Collections/ui/pages/MyListsPage";
+import ListDetailPage from "../../Collections/ui/pages/ListDetailPage";
+
 
 import TrackerPage from "../../Tracker/ui/pages/TrackerPage";
 
@@ -51,6 +53,7 @@ function AppRouter() {
           }
         />
 
+
         <Route
           path="/movie/:id"
           element={
@@ -89,16 +92,27 @@ function AppRouter() {
           }
         />
 
-        <Route
-          path="/collections"
-          element={
-            <ProtectedRoute>
-              <AppShell>
-                <CollectionsPage />
-              </AppShell>
-            </ProtectedRoute>
-          }
-        />
+<Route
+  path="/collections"
+  element={
+    <ProtectedRoute>
+      <AppShell>
+        <MyListsPage />
+      </AppShell>
+    </ProtectedRoute>
+  }
+/>
+// add new route:
+<Route
+  path="/collections/:listId"
+  element={
+    <ProtectedRoute>
+      <AppShell>
+        <ListDetailPage />
+      </AppShell>
+    </ProtectedRoute>
+  }
+/>
 
         <Route
           path="/tracker"
